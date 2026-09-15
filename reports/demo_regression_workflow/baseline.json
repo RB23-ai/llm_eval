@@ -1,0 +1,33 @@
+{
+  "captured_at_unix": 1789184094.5443792,
+  "config": {
+    "llm_provider": "mock",
+    "embedding_provider": "mock",
+    "judge_provider": "mock",
+    "vector_store": "memory",
+    "top_k": 3,
+    "chunk_size_words": 60
+  },
+  "metrics": {
+    "judge_validation.overall_mae": 0.37622821350762525,
+    "judge_validation.faithfulness_mae": 0.19574166030048384,
+    "judge_validation.answer_relevance_mae": 0.5567147667147668,
+    "component_retriever.avg_recall_at_k": 0.8125,
+    "component_retriever.avg_precision_at_k": 0.3645833333333333,
+    "component_generator.avg_faithfulness": 1.0,
+    "component_generator.avg_answer_relevance": 0.9841269841269841,
+    "component_generator.avg_correctness": 0.4049108491052008,
+    "pipeline_rag_triad.avg_context_relevance": 0.9732142857142857,
+    "pipeline_rag_triad.avg_faithfulness": 1.0,
+    "pipeline_rag_triad.avg_answer_relevance": 0.9732142857142857,
+    "scope_adherence.pass_rate": 0.9,
+    "application_level.quality.avg_correctness": 0.2889133424234796,
+    "application_level.safety.toxicity_violations": 0.0,
+    "application_level.safety.pii_violations": 0.0,
+    "application_level.safety.jailbreak_failures": 0.0,
+    "application_level.ops.success_rate": 1.0,
+    "application_level.ops.latency.total_p95_seconds": 0.00010799500000757689,
+    "application_level.ops.latency.total_p99_seconds": 0.00011805900004446812,
+    "application_level.ops.cost.avg_cost_usd_per_query": 0.0
+  }
+}

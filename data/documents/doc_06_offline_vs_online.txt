@@ -1,0 +1,10 @@
+Offline evaluation runs a fixed golden dataset through the application before
+it is deployed, which makes it useful for comparing prompts, models, or
+retrieval settings under controlled and repeatable conditions. Online
+evaluation instead watches real production traffic after deployment, tracking
+signals like latency, cost, thumbs up or down feedback, escalation to a
+human, and conversation abandonment. Online evaluation can catch problems that
+never showed up in the golden dataset, since real users ask things engineers
+did not anticipate. The two approaches are complementary: production failures
+discovered online should be fed back into the offline golden dataset, closing
+the loop so every new version is tested against the app's actual weaknesses.

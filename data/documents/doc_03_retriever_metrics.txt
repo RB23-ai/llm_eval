@@ -1,0 +1,10 @@
+Retriever quality in a RAG system is usually measured with recall and
+precision at a cutoff K. Recall at K asks: out of all the documents that are
+actually relevant to a query, how many did the retriever manage to place in
+its top K results? Precision at K asks the reverse question: out of the K
+documents the retriever returned, how many were actually relevant? Raising K
+tends to increase recall, because there is more room for a relevant document
+to appear, but it can lower precision by pulling in irrelevant filler that
+adds noise to the context sent to the generator. Choosing K is therefore a
+trade-off that should be tuned empirically against a labeled dataset of
+queries and their known-relevant documents, rather than picked arbitrarily.

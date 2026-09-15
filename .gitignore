@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.chroma/
+.env
+reports/*.json
+reports/eval_report.md
+!reports/.gitkeep

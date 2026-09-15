@@ -1,0 +1,10 @@
+Regression testing for an LLM application means re-running the same
+evaluation suite every time the code, prompt, or model changes, so that a
+change which improves one behavior is not silently allowed to break another.
+The simplest version of this is running the suite manually and comparing
+numbers between versions by hand. A more mature version logs each run's
+configuration, such as chunk size, prompt version, or model name, alongside
+its scores in an experiment tracker so trends are visible over time. The most
+mature version wires the evaluation suite into continuous integration, so
+that every code push automatically triggers the suite, and the pipeline
+blocks deployment if any metric falls below an agreed baseline threshold.

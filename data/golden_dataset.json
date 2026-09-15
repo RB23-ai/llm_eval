@@ -1,0 +1,98 @@
+[
+  {
+    "id": "q01",
+    "question": "What is the difference between model evaluation and application evaluation?",
+    "relevant_doc_ids": ["doc_01_model_vs_app_evals"],
+    "reference_answer": "Model evaluation tests the raw capability of the base LLM using standardized benchmarks, while application evaluation tests the whole system built around the model, including the prompt, retriever, and orchestration layer."
+  },
+  {
+    "id": "q02",
+    "question": "Why is a strong model not enough to guarantee a good AI application?",
+    "relevant_doc_ids": ["doc_01_model_vs_app_evals"],
+    "reference_answer": "Because application quality also depends on the surrounding system, like the smartphone analogy where a fast processor alone does not make a good phone."
+  },
+  {
+    "id": "q03",
+    "question": "What should a good golden dataset contain?",
+    "relevant_doc_ids": ["doc_02_golden_dataset"],
+    "reference_answer": "A mix of normal examples, difficult examples, ambiguous edge cases, and real failures captured from production."
+  },
+  {
+    "id": "q04",
+    "question": "Why should production failures be added back into the golden dataset?",
+    "relevant_doc_ids": ["doc_02_golden_dataset"],
+    "reference_answer": "So the evaluation suite keeps testing against the application's real weaknesses instead of drifting out of sync with real usage."
+  },
+  {
+    "id": "q05",
+    "question": "What does Recall at K measure for a retriever?",
+    "relevant_doc_ids": ["doc_03_retriever_metrics"],
+    "reference_answer": "The fraction of all truly relevant documents that were successfully placed in the retriever's top K results."
+  },
+  {
+    "id": "q06",
+    "question": "What is the trade-off between recall and precision when increasing K?",
+    "relevant_doc_ids": ["doc_03_retriever_metrics"],
+    "reference_answer": "Increasing K tends to raise recall but can lower precision by pulling in irrelevant documents that add noise."
+  },
+  {
+    "id": "q07",
+    "question": "What three relationships does the RAG triad evaluate?",
+    "relevant_doc_ids": ["doc_04_rag_triad"],
+    "reference_answer": "Context relevance between question and context, faithfulness between context and answer, and answer relevance between question and answer."
+  },
+  {
+    "id": "q08",
+    "question": "What does faithfulness mean in the RAG triad?",
+    "relevant_doc_ids": ["doc_04_rag_triad"],
+    "reference_answer": "Whether the generated answer is actually supported by the retrieved context rather than invented or pulled from outside knowledge."
+  },
+  {
+    "id": "q09",
+    "question": "What is LLM-as-a-judge used for?",
+    "relevant_doc_ids": ["doc_05_llm_as_judge"],
+    "reference_answer": "Using a separate model call to score an application's output when correctness is subjective or too costly to check manually at scale."
+  },
+  {
+    "id": "q10",
+    "question": "How should an LLM judge be validated before being trusted?",
+    "relevant_doc_ids": ["doc_05_llm_as_judge"],
+    "reference_answer": "By comparing the judge's scores to human scores on the same answers and computing the mean absolute error between them."
+  },
+  {
+    "id": "q11",
+    "question": "What is the difference between offline and online evaluation?",
+    "relevant_doc_ids": ["doc_06_offline_vs_online"],
+    "reference_answer": "Offline evaluation runs a fixed golden dataset before deployment, while online evaluation tracks real production traffic and signals after deployment."
+  },
+  {
+    "id": "q12",
+    "question": "What signals does online evaluation track in production?",
+    "relevant_doc_ids": ["doc_06_offline_vs_online"],
+    "reference_answer": "Signals like latency, cost, thumbs up or down feedback, escalation to a human, and conversation abandonment."
+  },
+  {
+    "id": "q13",
+    "question": "What does PII leakage evaluation check for?",
+    "relevant_doc_ids": ["doc_07_safety_metrics"],
+    "reference_answer": "Whether the system exposes personally identifiable information such as emails, phone numbers, or government identifiers."
+  },
+  {
+    "id": "q14",
+    "question": "What is jailbreak resistance testing for?",
+    "relevant_doc_ids": ["doc_07_safety_metrics"],
+    "reference_answer": "Whether adversarial prompts can push the system past its intended guardrails into behavior it was designed to avoid."
+  },
+  {
+    "id": "q15",
+    "question": "What is the most mature level of regression testing for an LLM application?",
+    "relevant_doc_ids": ["doc_08_ci_regression"],
+    "reference_answer": "Wiring the evaluation suite into continuous integration so every code push runs it automatically and blocks deployment if scores fall below a baseline."
+  },
+  {
+    "id": "q16",
+    "question": "What is the simplest version of regression testing?",
+    "relevant_doc_ids": ["doc_08_ci_regression"],
+    "reference_answer": "Running the evaluation suite manually and comparing scores between versions by hand."
+  }
+]

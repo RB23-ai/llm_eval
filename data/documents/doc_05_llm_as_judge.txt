@@ -1,0 +1,10 @@
+LLM-as-a-judge uses a separate model call to score the output of an
+application, which is useful when correctness is subjective or too expensive
+to check by hand at scale. A judge prompt typically includes the original
+question, the generated answer, the scoring criteria, and sometimes a
+reference answer to compare against. Because judges are themselves models,
+they need to be validated against human graders before being trusted, often
+by comparing judge scores to human scores on the same set of answers and
+computing the mean absolute error between them. A judge that drifts far from
+human judgment on a validation set should not be relied on for grading in
+production, no matter how convenient it is to call.

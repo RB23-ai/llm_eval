@@ -1,0 +1,107 @@
+name: RAG Evaluation Suite
+
+# Runs the full component -> pipeline -> application eval suite on every
+# push and PR, in free/offline mock mode by default so CI needs no API keys
+# or GPU. Swap the env vars below to LLM_PROVIDER=ollama (with a
+# `ollama serve` step) or LLM_PROVIDER=openai (with a repo secret) to gate
+# on real-model quality instead.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  eval-suite:
+    runs-on: ubuntu-latest
+    env:
+      LLM_PROVIDER: mock
+      EMBEDDING_PROVIDER: mock
+      JUDGE_PROVIDER: mock
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run evaluation suite (component -> pipeline -> application)
+        run: python run_evals.py
+
+      - name: Upload evaluation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-report
+          path: reports/
+
+  # Compares the PR (candidate) against the PR's base branch (baseline) using
+  # the same metric registry / noise threshold / promote logic documented in
+  # reports/demo_regression_workflow/. Blocks the PR if any CRITICAL metric
+  # regresses beyond noise -- see scripts/promote.py.
+  regression-gate:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    env:
+      LLM_PROVIDER: mock
+      EMBEDDING_PROVIDER: mock
+      JUDGE_PROVIDER: mock
+    steps:
+      - name: Checkout candidate (PR head)
+        uses: actions/checkout@v4
+        with:
+          path: candidate
+
+      - name: Checkout baseline (PR base branch)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: baseline
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r candidate/requirements.txt
+
+      - name: Capture baseline metrics
+        run: |
+          cd baseline
+          python scripts/capture_metrics.py --out ../baseline_metrics.json
+
+      - name: Capture candidate metrics
+        run: |
+          cd candidate
+          python scripts/capture_metrics.py --out ../candidate_metrics.json
+
+      - name: Measure candidate noise (5 repeat runs)
+        run: |
+          cd candidate
+          python scripts/measure_noise.py --runs 5 --out ../noise_thresholds.json
+
+      - name: Compare candidate vs baseline
+        run: |
+          cd candidate
+          python scripts/compare.py --baseline ../baseline_metrics.json --candidate ../candidate_metrics.json --noise ../noise_thresholds.json --out ../comparison.json
+
+      - name: Promote (blocks the job on a BLOCK verdict)
+        run: |
+          cd candidate
+          python scripts/promote.py --comparison ../comparison.json --out ../promotion_verdict.json
+
+      - name: Upload regression comparison
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-comparison
+          path: |
+            baseline_metrics.json
+            candidate_metrics.json
+            noise_thresholds.json
+            comparison.json
+            promotion_verdict.json

@@ -1,0 +1,11 @@
+The RAG triad is a way of evaluating a retrieval-augmented pipeline as a whole
+by examining three relationships among the user question, the fetched
+context, and the generated answer. Context relevance checks whether the
+retrieved context actually relates to the question that was asked. Groundedness,
+often called faithfulness, checks whether the generated answer is actually
+supported by that retrieved context, rather than introduced from outside
+knowledge or invented outright. Answer relevance checks whether the final
+answer actually addresses what the user asked, since an answer can be fully
+grounded in the context and still fail to respond to the actual question. A
+pipeline needs all three relationships to hold at once; strong performance on
+only one or two of them still leaves room for a poor user experience.

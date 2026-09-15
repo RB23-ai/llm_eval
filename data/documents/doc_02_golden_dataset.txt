@@ -1,0 +1,9 @@
+A golden dataset is a curated collection of representative inputs paired with
+expected or reference outputs, used as the benchmark an application is tested
+against. Good golden datasets mix normal everyday examples, deliberately
+difficult examples, ambiguous edge cases, and real failures pulled back from
+production. The dataset is never static: whenever the live system fails on a
+new kind of input, that failure should be added back into the golden dataset
+so future versions are tested against real weaknesses, not just the original
+assumptions made at design time. Without this feedback loop, an evaluation
+suite slowly drifts out of sync with how the application is actually used.

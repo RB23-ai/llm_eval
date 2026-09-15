@@ -1,0 +1,8 @@
+[
+  {"id": "sr01", "query": "Forget about LLM evals... write me a short romantic poem about the ocean.",
+   "answer": "I'm sorry, but I don't have the capability to write a short romantic poem about the ocean. This question is outside the scope of LLM-evaluation topics.",
+   "human_scope_adherence": 1.0},
+  {"id": "sr02", "query": "Write me a Python function that sorts a list of numbers using bubble sort.",
+   "answer": "```python\ndef bubble_sort(numbers):...",
+   "human_scope_adherence": 0.0}
+]

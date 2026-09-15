@@ -1,0 +1,8 @@
+{
+  "verdict": "BLOCK",
+  "reason": "3 critical metric(s) regressed beyond noise threshold: component_retriever.avg_recall_at_k, pipeline_rag_triad.avg_answer_relevance, scope_adherence.pass_rate",
+  "n_critical_regressed": 3,
+  "n_important_regressed": 1,
+  "n_minor_regressed": 0,
+  "n_improved": 4
+}

@@ -1,0 +1,140 @@
+[
+  {
+    "_note": "These 15 ratings were hand-authored for this demo by deliberately writing answers of varying quality (fully faithful, partially hallucinated, off-topic, contradictory) and scoring them the way a careful human grader would. They are NOT crowdsourced or collected from real annotators. In a real project, replace this file with ~30+ ratings from actual human graders on real model outputs. The point of this file is the *mechanism* (validate the judge against ground truth with MAE before trusting it), not the specific numbers -- see doc_05_llm_as_judge.txt."
+  },
+  {
+    "id": "hr01",
+    "question": "What does Recall at K measure for a retriever?",
+    "context": "Retriever quality in a RAG system is usually measured with recall and precision at a cutoff K. Recall at K asks: out of all the documents that are actually relevant to a query, how many did the retriever manage to place in its top K results?",
+    "candidate_answer": "Recall at K measures the fraction of all truly relevant documents that appear in the retriever's top K results.",
+    "human_faithfulness": 1.0,
+    "human_answer_relevance": 1.0,
+    "notes": "Directly and accurately restates the context; fully grounded and on-topic."
+  },
+  {
+    "id": "hr02",
+    "question": "What does Recall at K measure for a retriever?",
+    "context": "Retriever quality in a RAG system is usually measured with recall and precision at a cutoff K. Recall at K asks: out of all the documents that are actually relevant to a query, how many did the retriever manage to place in its top K results?",
+    "candidate_answer": "Recall at K measures how fast the retriever responds to a query, in milliseconds.",
+    "human_faithfulness": 0.0,
+    "human_answer_relevance": 0.2,
+    "notes": "Fabricated definition, not supported by context at all; latency is a different metric entirely."
+  },
+  {
+    "id": "hr03",
+    "question": "What is the RAG Triad?",
+    "context": "The RAG triad is a way of evaluating a retrieval-augmented pipeline as a whole by examining three relationships among the user question, the fetched context, and the generated answer.",
+    "candidate_answer": "The RAG Triad evaluates three relationships: question-context, context-answer, and question-answer.",
+    "human_faithfulness": 0.9,
+    "human_answer_relevance": 1.0,
+    "notes": "Correct and grounded, slightly terser than the source but accurate."
+  },
+  {
+    "id": "hr04",
+    "question": "What is the RAG Triad?",
+    "context": "The RAG triad is a way of evaluating a retrieval-augmented pipeline as a whole by examining three relationships among the user question, the fetched context, and the generated answer.",
+    "candidate_answer": "MMLU is a benchmark that tests broad knowledge across 57 academic subjects using multiple choice questions.",
+    "human_faithfulness": 0.0,
+    "human_answer_relevance": 0.0,
+    "notes": "Completely off-topic; answers a different question about a different benchmark."
+  },
+  {
+    "id": "hr05",
+    "question": "Why should production failures be added back into the golden dataset?",
+    "context": "Whenever the live system fails on a new kind of input, that failure should be added back into the golden dataset so future versions are tested against real weaknesses, not just the original assumptions made at design time.",
+    "candidate_answer": "So future versions of the system keep getting tested against the real weaknesses discovered in production, instead of only the assumptions made when it was first designed.",
+    "human_faithfulness": 1.0,
+    "human_answer_relevance": 1.0,
+    "notes": "Faithful paraphrase, fully answers the question."
+  },
+  {
+    "id": "hr06",
+    "question": "Why should production failures be added back into the golden dataset?",
+    "context": "Whenever the live system fails on a new kind of input, that failure should be added back into the golden dataset so future versions are tested against real weaknesses, not just the original assumptions made at design time.",
+    "candidate_answer": "Because it also improves the retriever's embedding quality and reduces hosting costs by up to 40%.",
+    "human_faithfulness": 0.0,
+    "human_answer_relevance": 0.1,
+    "notes": "Invents unrelated benefits (cost, embeddings) not present in the context; a hallucination."
+  },
+  {
+    "id": "hr07",
+    "question": "What is LLM-as-a-judge used for?",
+    "context": "LLM-as-a-judge uses a separate model call to score the output of an application, which is useful when correctness is subjective or too expensive to check by hand at scale.",
+    "candidate_answer": "It uses another model to score an application's output, which helps when correctness is subjective or too costly to check manually at scale.",
+    "human_faithfulness": 1.0,
+    "human_answer_relevance": 1.0,
+    "notes": "Accurate, grounded restatement."
+  },
+  {
+    "id": "hr08",
+    "question": "What is LLM-as-a-judge used for?",
+    "context": "LLM-as-a-judge uses a separate model call to score the output of an application, which is useful when correctness is subjective or too expensive to check by hand at scale.",
+    "candidate_answer": "LLM-as-a-judge is a legal term used in courts where AI systems judge criminal cases.",
+    "human_faithfulness": 0.0,
+    "human_answer_relevance": 0.0,
+    "notes": "Fabricated and unrelated to the actual (ML evaluation) meaning."
+  },
+  {
+    "id": "hr09",
+    "question": "How should an LLM judge be validated before being trusted?",
+    "context": "Judges need to be validated against human graders before being trusted, often by comparing judge scores to human scores on the same set of answers and computing the mean absolute error between them.",
+    "candidate_answer": "By comparing its scores to human scores on the same answers and calculating the mean absolute error between them.",
+    "human_faithfulness": 1.0,
+    "human_answer_relevance": 1.0,
+    "notes": "Correct and complete."
+  },
+  {
+    "id": "hr10",
+    "question": "How should an LLM judge be validated before being trusted?",
+    "context": "Judges need to be validated against human graders before being trusted, often by comparing judge scores to human scores on the same set of answers and computing the mean absolute error between them.",
+    "candidate_answer": "Judges are automatically trustworthy once they pass the MMLU benchmark with a high score.",
+    "human_faithfulness": 0.0,
+    "human_answer_relevance": 0.15,
+    "notes": "Wrong claim not supported by the context, and conflates two unrelated concepts (MMLU vs judge validation)."
+  },
+  {
+    "id": "hr11",
+    "question": "What does PII leakage evaluation check for?",
+    "context": "PII leakage checks whether the system exposes personally identifiable information that it should not, such as emails, phone numbers, or government identifiers pulled from source documents or user history.",
+    "candidate_answer": "It checks whether the system leaks personal information like emails, phone numbers, or government IDs.",
+    "human_faithfulness": 1.0,
+    "human_answer_relevance": 1.0,
+    "notes": "Accurate summary."
+  },
+  {
+    "id": "hr12",
+    "question": "What does PII leakage evaluation check for?",
+    "context": "PII leakage checks whether the system exposes personally identifiable information that it should not, such as emails, phone numbers, or government identifiers pulled from source documents or user history.",
+    "candidate_answer": "PII leakage refers to how quickly a model's performance degrades over long conversations.",
+    "human_faithfulness": 0.0,
+    "human_answer_relevance": 0.05,
+    "notes": "Wrong definition entirely; describes something like context drift instead."
+  },
+  {
+    "id": "hr13",
+    "question": "What is the simplest version of regression testing?",
+    "context": "The simplest version of this is running the suite manually and comparing numbers between versions by hand.",
+    "candidate_answer": "Running the evaluation suite by hand and manually comparing the scores across versions.",
+    "human_faithfulness": 1.0,
+    "human_answer_relevance": 1.0,
+    "notes": "Correct paraphrase."
+  },
+  {
+    "id": "hr14",
+    "question": "What is the simplest version of regression testing?",
+    "context": "The simplest version of this is running the suite manually and comparing numbers between versions by hand.",
+    "candidate_answer": "The simplest version wires the evaluation suite into a CI pipeline that automatically blocks bad deployments.",
+    "human_faithfulness": 0.2,
+    "human_answer_relevance": 0.6,
+    "notes": "On-topic (regression testing) but describes the MOST mature level, not the simplest -- partially wrong, borrowed from a different part of the same document."
+  },
+  {
+    "id": "hr15",
+    "question": "What is jailbreak resistance testing for?",
+    "context": "Jailbreak resistance checks whether adversarial prompts can push the system past its intended guardrails into behavior it was designed to avoid.",
+    "candidate_answer": "It tests whether cleverly worded adversarial prompts can make the system break its own guardrails and do things it was designed not to do.",
+    "human_faithfulness": 1.0,
+    "human_answer_relevance": 1.0,
+    "notes": "Accurate restatement."
+  }
+]

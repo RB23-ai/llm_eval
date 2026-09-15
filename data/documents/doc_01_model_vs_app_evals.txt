@@ -1,0 +1,12 @@
+Model evaluations measure the raw capability of a base LLM, independent of any
+specific product built on top of it. They test skills like reasoning, coding,
+world knowledge, and instruction following, usually with standardized public
+benchmarks. Application evaluations, by contrast, measure whether an entire
+system built around a model actually works for its intended task. An
+application includes the prompt, the retriever, the orchestration layer, any
+tools it calls, and the final output shown to the user. A model can be
+individually strong while the application built on it still fails, because
+failures often come from the surrounding system rather than the model itself.
+A useful analogy is a smartphone: a fast processor does not guarantee a good
+phone, since battery, camera, and software also determine the experience. In
+the same way, a capable model does not guarantee a good AI application.

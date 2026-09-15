@@ -1,0 +1,11 @@
+Application-level safety evaluation checks properties that sit alongside
+correctness rather than replacing it. Toxicity checks whether outputs are
+offensive, abusive, or otherwise inappropriate for the audience. PII leakage
+checks whether the system exposes personally identifiable information that it
+should not, such as emails, phone numbers, or government identifiers pulled
+from source documents or user history. Jailbreak resistance checks whether
+adversarial prompts can push the system past its intended guardrails into
+behavior it was explicitly designed to avoid. These checks are usually run
+alongside quality metrics as part of the same evaluation suite, because a
+technically correct answer that leaks private data or uses toxic language is
+still a failure of the overall application.

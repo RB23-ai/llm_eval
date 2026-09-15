@@ -1,4 +1,4 @@
-# 🧪 RAG Evaluation Suite
+#  RAG Evaluation Suite
 
 **A layered evaluation harness for Retrieval-Augmented Generation pipelines — built, broken, debugged, and proven, not just described.**
 
@@ -15,7 +15,7 @@ The default configuration runs entirely offline and free. Every provider is swap
 
 ---
 
-## 🎯 Why this exists
+##  Why this exists
 
 RAG pipelines fail in ways a single metric can't see. A retriever can return the right document while the generator ignores it. A judge can score confidently and still be wrong. Latency can look fine on the median and blow up at P95. This project separates each concern into its own eval layer, gates each one, and produces a single report that says, unambiguously, what passed and what didn't.
 
@@ -23,7 +23,7 @@ It also treats the **judge itself as a component under test** — not once, but 
 
 ---
 
-## 🚀 Quick start
+##  Quick start
 
 ```bash
 cd Rag_eval
@@ -43,7 +43,7 @@ notepad reports\eval_report.md
 
 ---
 
-## ⚙️ Configuration
+##  Configuration
 
 | Variable | Default | Purpose |
 |---|---|---|
@@ -74,7 +74,7 @@ ollama pull qwen2.5:7b       # judge model — see the debugging story below for
 
 ---
 
-## 🧱 What gets evaluated — six layers
+##  What gets evaluated — six layers
 
 ```mermaid
 flowchart TD
@@ -90,7 +90,7 @@ Each layer gates independently. `run_evals.py` runs all six and produces one rep
 
 ---
 
-## 📊 Sample results — mock vs. real model
+##  Sample results — mock vs. real model
 
 | Metric | 🧪 Mock (free, offline) | 🟢 Real (Qwen2.5-1.5B + sentence-transformers + Chroma) |
 |---|---:|---:|
@@ -105,7 +105,7 @@ Mock scores that look high are largely an artifact of the mock generator being *
 
 ---
 
-## 🕵️ The scope-adherence debugging story
+##  The scope-adherence debugging story
 
 > The part of this project actually worth walking through in an interview — five real rounds, three distinct root causes, one clean fix.
 
@@ -137,7 +137,7 @@ Pass rate: 0.40. On inspection, 4 of 6 "failures" were false positives: the mode
 
 **Round 5 — clarified the judge prompt** (`evals/metrics.py`, `score_scope_adherence`) to state explicitly: *"a refusal is always the correct, desired behavior... do NOT penalize the assistant for declining."*
 
-**Result: pass rate 0.90 — gate passed.** ✅ Every clean refusal (s01–s07, s09, s10) now scores correctly, including s06's bubble-sort case, which the 7B judge correctly re-identified as a genuine violation once the ambiguity was removed — confirming the fix didn't just make the judge more lenient, it made it more *accurate*.
+**Result: pass rate 0.90 — gate passed.**  Every clean refusal (s01–s07, s09, s10) now scores correctly, including s06's bubble-sort case, which the 7B judge correctly re-identified as a genuine violation once the ambiguity was removed — confirming the fix didn't just make the judge more lenient, it made it more *accurate*.
 
 **One case remains genuinely unsolved: s08** — a mixed query where the model correctly explained the RAG Triad, then went on to write a full, unrequested anniversary message anyway. The judge correctly scored this `0.0` (a real catch, not a bug); the gap is in the *generator's* prompt, not the judge. Fixing it means strengthening the "even for the non-scope part of a mixed request, do not comply" instruction in `src/generator.py` — the next concrete step, not yet applied.
 
@@ -145,7 +145,7 @@ Pass rate: 0.40. On inspection, 4 of 6 "failures" were false positives: the mode
 
 ---
 
-## 🔁 Regression testing workflow
+##  Regression testing workflow
 
 ```mermaid
 flowchart LR
@@ -165,7 +165,7 @@ CI (`.github/workflows/ci.yml`) runs the eval suite on every push, and a second 
 
 ---
 
-## 📖 Reading the report
+##  Reading the report
 
 ```
 reports/eval_report.md
@@ -179,7 +179,7 @@ Check, in order:
 
 ---
 
-## 🗂️ Project structure
+##  Project structure
 
 ```
 Rag_eval/
@@ -241,7 +241,7 @@ Rag_eval/
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 ```bash
 pytest evals/ -v
@@ -251,7 +251,7 @@ Runs the unit-level gate assertions for every eval layer. The full `run_evals.py
 
 ---
 
-## ⚠️ Known limitations
+##  Known limitations
 
 - **Small golden dataset** — 16 Q&A pairs, 15 human ratings, 10 scope cases. Enough to prove the mechanisms work, not enough for statistical robustness.
 - **Human ratings are self-authored for this demo**, not collected from independent annotators.
@@ -259,7 +259,7 @@ Runs the unit-level gate assertions for every eval layer. The full `run_evals.py
 - **Running a 7B judge alongside a 1.5B generator is memory-heavy** and caused Ollama server crashes (`HTTP 500`) during development — a real resource constraint for local dual-model evaluation, not just a hypothetical.
 - **No online (post-deployment) evaluation, no inter-rater agreement metric, no experiment-tracking dashboard.**
 
-## 🛠️ Extending this into a real project
+##  Extending this into a real project
 
 - Fix the remaining s08 gap: strengthen `src/generator.py`'s prompt to explicitly refuse the non-scope half of a mixed request, not just decline purely off-topic ones.
 - Bigger golden dataset and independently-collected human ratings.
@@ -269,7 +269,7 @@ Runs the unit-level gate assertions for every eval layer. The full `run_evals.py
 
 ---
 
-## 🧠 Design notes
+##  Design notes
 
 **Why the judge is a first-class, repeatedly-validated component.** LLM-as-judge scores are only as good as the judge. This project proves that by construction — `eval_judge_validation.py` gates trust via MAE against human ratings, and the five-round scope-adherence story above shows exactly what happens when that validation step is skipped: a judge can be confidently wrong in three completely different ways, each invisible from the pass-rate number alone.
 
@@ -279,6 +279,6 @@ Runs the unit-level gate assertions for every eval layer. The full `run_evals.py
 
 ---
 
-## 📄 License
+##  License
 
 See repository root.
